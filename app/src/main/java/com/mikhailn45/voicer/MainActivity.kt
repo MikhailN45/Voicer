@@ -1,5 +1,7 @@
 package com.mikhailn45.voicer
 
+import android.app.ActivityManager
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
@@ -12,6 +14,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        NavigationUI.setupWithNavController(bottom_navigation, Navigation.findNavController(this, R.id.nav_host_fragment_container))
+        NavigationUI.setupWithNavController(
+            bottom_navigation,
+            Navigation.findNavController(this, R.id.nav_host_fragment_container)
+        )
+    }
+
+    fun isServiceRunning(): Boolean {
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+            if ("com.mikhailn45.voicer.record.RecordService" == service.service.className) {
+                return true
+            }
+        }
+        return false
     }
 }
