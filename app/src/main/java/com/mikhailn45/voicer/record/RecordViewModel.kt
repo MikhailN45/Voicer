@@ -14,12 +14,14 @@ import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 
 class RecordViewModel(private val app: Application) : AndroidViewModel(app) {
+
     private val TRIGGER_TIME = "TRIGGER_AT"
-    private val second: Long = 1_00L
+    private val second: Long = 1_000L
 
     private var prefs = app.getSharedPreferences("com.mikhailn45.voicer", Context.MODE_PRIVATE)
 
     private val _elapsedTime = MutableLiveData<String>()
+
     val elapsedTime: LiveData<String>
         get() = _elapsedTime
 
@@ -31,7 +33,7 @@ class RecordViewModel(private val app: Application) : AndroidViewModel(app) {
 
     fun timeFormatter(time: Long): String {
         return String.format(
-            "%02d:%02d:%02d:",
+            "%02d:%02d:%02d",
             TimeUnit.MILLISECONDS.toHours(time) % 60,
             TimeUnit.MILLISECONDS.toMinutes(time) % 60,
             TimeUnit.MILLISECONDS.toSeconds(time) % 60
@@ -39,7 +41,9 @@ class RecordViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     fun stopTimer() {
-        timer.cancel()
+        if (this::timer.isInitialized) {
+            timer.cancel()
+        }
         resetTimer()
     }
 
