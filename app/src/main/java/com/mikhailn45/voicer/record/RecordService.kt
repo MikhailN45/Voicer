@@ -24,7 +24,6 @@ class RecordService : Service() {
 
     private var mFileName: String? = null
     private var mFilePath: String? = null
-    private var mCountRecords: Int? = null
 
     private var mRecorder: MediaRecorder? = null
 
@@ -36,8 +35,6 @@ class RecordService : Service() {
     private val mJob = Job()
     private val mUiScope = CoroutineScope(Dispatchers.Main + mJob)
 
-    private val CHANNEL_ID = "RecordService"
-
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
@@ -48,11 +45,9 @@ class RecordService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        mCountRecords = intent?.extras!!["COUNT"] as Int?
 
         startRecording()
-
-        return START_STICKY
+        return START_NOT_STICKY
     }
 
     private fun startRecording() {
@@ -78,7 +73,7 @@ class RecordService : Service() {
 
     fun createNotification(): Notification? {
         val mBuilder: NotificationCompat.Builder =
-            NotificationCompat.Builder(applicationContext, CHANNEL_ID)
+            NotificationCompat.Builder(applicationContext, getString(R.string.notification_channel_id))
                 .setSmallIcon(R.drawable.ic_mic_white_36dp)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.notification_recording))
