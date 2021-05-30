@@ -5,7 +5,6 @@
     tools:context=".record.RecordFragment">
 
     <data>
-
         <variable
             name="recordViewModel"
             type="com.mikhailn45.voicer.record.RecordViewModel" />
@@ -26,7 +25,7 @@
             android:textSize="36sp"
             app:flow_horizontalBias="0.5"
             app:flow_verticalBias="1"
-            app:layout_constraintBottom_toTopOf="@id/record_button"
+            app:layout_constraintBottom_toTopOf="@id/recordButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +34,7 @@
         </TextView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/record_button"
+            android:id="@+id/recordButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"

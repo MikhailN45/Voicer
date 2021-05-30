@@ -16,8 +16,8 @@
     <string name="dialog_action_no">Нет</string>
 
     <string name="toast_recording_permissions">Без разрешения запись невозможна!</string>
-    <string name="notification_channel_id">VoiceRecordingService</string>
-    <string name="notification_channel_name">VoiceRecorder</string>
+    <string name="notification_channel_id">RecordService</string>
+    <string name="notification_channel_name">Recorder</string>
 
 
 </resources>

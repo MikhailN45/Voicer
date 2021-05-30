@@ -20,15 +20,16 @@ import java.io.IOException
 import java.lang.Exception
 import java.text.SimpleDateFormat
 
-class RecordService : Service() {
+
+class RecordService: Service() {
 
     private var mFileName: String? = null
     private var mFilePath: String? = null
 
     private var mRecorder: MediaRecorder? = null
 
-    private var mStartedTimeMillis: Long = 0
-    private var mElapsedTimeMillis: Long = 0
+    private var mStartingTimeMillis: Long = 0
+    private var mElapsedMillis: Long = 0
 
     private var mDatabase: RecordDatabaseDao? = null
 
@@ -64,20 +65,20 @@ class RecordService : Service() {
         try {
             mRecorder?.prepare()
             mRecorder?.start()
-            mStartedTimeMillis = System.currentTimeMillis()
+            mStartingTimeMillis = System.currentTimeMillis()
             startForeground(1, createNotification())
         } catch (e: IOException) {
-            Log.e("RecordService", "Prepare failed")
+            Log.e("RecordService", "prepare failed")
         }
     }
 
-    fun createNotification(): Notification? {
-        val mBuilder: NotificationCompat.Builder =
-            NotificationCompat.Builder(applicationContext, getString(R.string.notification_channel_id))
-                .setSmallIcon(R.drawable.ic_mic_white_36dp)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText(getString(R.string.notification_recording))
-                .setOngoing(true)
+    private fun createNotification(): Notification? {
+        val mBuilder: NotificationCompat.Builder
+                = NotificationCompat.Builder(applicationContext, getString(R.string.notification_channel_id))
+            .setSmallIcon(R.drawable.ic_mic_white_36dp)
+            .setContentTitle(getString(R.string.app_name))
+            .setContentText(getString(R.string.notification_recording))
+            .setOngoing(true)
         mBuilder.setContentIntent(
             PendingIntent.getActivities(
                 applicationContext, 0, arrayOf(
@@ -97,7 +98,8 @@ class RecordService : Service() {
         val dateTime = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss").format(System.currentTimeMillis())
 
         do {
-            mFileName = (getString(R.string.default_file_name) + "_" + dateTime + count + ".mp4")
+            mFileName = (getString(R.string.default_file_name)
+                    + "_" + dateTime + count + ".mp4")
             mFilePath = application.getExternalFilesDir(null)?.absolutePath
             mFilePath += "/$mFileName"
 
@@ -111,19 +113,18 @@ class RecordService : Service() {
         val recordingItem = RecordingItem()
 
         mRecorder?.stop()
-        mElapsedTimeMillis = System.currentTimeMillis() - mStartedTimeMillis
+        mElapsedMillis = System.currentTimeMillis() - mStartingTimeMillis
         mRecorder?.release()
-
-        Toast.makeText(
-            this,
+        Toast.makeText(this,
             getString(R.string.toast_recording_finish),
             Toast.LENGTH_SHORT
         ).show()
 
         recordingItem.name = mFileName.toString()
         recordingItem.filePath = mFilePath.toString()
-        recordingItem.length = mElapsedTimeMillis
+        recordingItem.length = mElapsedMillis
         recordingItem.time = System.currentTimeMillis()
+
 
         mRecorder = null
 
@@ -142,6 +143,8 @@ class RecordService : Service() {
         if (mRecorder != null) {
             stopRecording()
         }
+
         super.onDestroy()
     }
+
 }

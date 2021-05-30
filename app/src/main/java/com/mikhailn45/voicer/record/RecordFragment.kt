@@ -83,7 +83,7 @@ class RecordFragment : Fragment() {
         val intent: Intent =  Intent(activity, RecordService::class.java)
 
         if (start) {
-            record_button.setImageResource(R.drawable.ic_media_stop)
+            recordButton.setImageResource(R.drawable.ic_media_stop)
             Toast.makeText(activity, R.string.toast_recording_start, Toast.LENGTH_SHORT).show()
 
             val folder = File(activity?.getExternalFilesDir(null)?.absolutePath.toString() + "/VoiceRecorder")
@@ -94,7 +94,7 @@ class RecordFragment : Fragment() {
             activity?.startService(intent)
             activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
-            record_button.setImageResource(R.drawable.ic_mic_white_36dp)
+            recordButton.setImageResource(R.drawable.ic_mic_white_36dp)
 
             activity?.stopService(intent)
             activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -142,16 +142,3 @@ class RecordFragment : Fragment() {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
