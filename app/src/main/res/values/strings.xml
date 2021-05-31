@@ -18,6 +18,8 @@
     <string name="toast_recording_permissions">Без разрешения запись невозможна!</string>
     <string name="notification_channel_id">RecordService</string>
     <string name="notification_channel_name">Recorder</string>
+    <string name="zero_timer">00:00</string>
+    <string name="file_name">File Name</string>
 
 
 </resources>

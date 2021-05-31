@@ -14,5 +14,5 @@
         android:id="@+id/listFragment"
         android:name="com.mikhailn45.voicer.recordList.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list_record" />
 </navigation>
