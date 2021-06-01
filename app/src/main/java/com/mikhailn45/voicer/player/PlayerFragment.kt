@@ -8,6 +8,7 @@ import androidx.core.app.BundleCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.mikhailn45.voicer.R
 import kotlinx.android.synthetic.main.player_fragment.*
 
 class PlayerFragment : DialogFragment() {
@@ -35,7 +36,7 @@ class PlayerFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(R.layout.player_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
