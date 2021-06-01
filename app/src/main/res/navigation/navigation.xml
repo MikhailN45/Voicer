@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_record" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.mikhailn45.voicer.recordList.ListFragment"
+        android:name="com.mikhailn45.voicer.listRecord.ListRecordFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list_record" />
 </navigation>

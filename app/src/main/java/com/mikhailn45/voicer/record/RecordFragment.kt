@@ -86,7 +86,7 @@ class RecordFragment : Fragment() {
             recordButton.setImageResource(R.drawable.ic_media_stop)
             Toast.makeText(activity, R.string.toast_recording_start, Toast.LENGTH_SHORT).show()
 
-            val folder = File(activity?.getExternalFilesDir(null)?.absolutePath.toString() + "/VoiceRecorder")
+            val folder = File(activity?.getExternalFilesDir(null)?.absolutePath.toString() + "/Voicer")
             if (!folder.exists()) {
                 folder.mkdir()
             }
